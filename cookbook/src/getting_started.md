@@ -19,6 +19,25 @@ cargo new my-rust-bitcoin-project
 cd my-rust-bitcoin-project
 ```
 
+At this point, you should have a project layout that looks like this:
+
+```text
+my-rust-bitcoin-project
+├── Cargo.toml
+└── src
+    └── main.rs
+```
+
+And the default `src/main.rs` produced by Cargo will look like this:
+
+```rust
+fn main() {
+    println!("Hello, world!");
+}
+```
+
+We'll replace that with our first `rust-bitcoin` program in the next steps.
+
 ## Add the crate
 
 Now that you have your project set up, add the `bitcoin` crate with Cargo:
@@ -35,10 +54,58 @@ bitcoin = "0.32.8"
 ```
 
 ## Enable useful features when you need them
-For example, if you want random key generation during experiments:
+
+`rust-bitcoin` has several package features, which let you opt into additional capabilities at compile time.
+
+The first additional features you are most likely to care about are:
+
+- `rand-std`: enables helpers like random private key generation
+- `serde`: enables serialization and deserialization support for Bitcoin types
+
+Enable the `rand-std` feature:
 
 ```bash
 cargo add bitcoin --features rand-std
 ```
 
+Enable both the `rand-std` and `serde` features:
+
+```bash
+cargo add bitcoin --features rand-std,serde
+```
+
 ## Write a first tiny program
+
+A fun first program is one that generates a brand new testnet keypair and prints the corresponding WIF and address.
+
+Replace the default contents of `src/main.rs` with:
+
+```rust
+use bitcoin::key::Secp256k1;
+use bitcoin::{Address, Network, PrivateKey};
+
+fn main() {
+    let secp = Secp256k1::new();
+    let private_key = PrivateKey::generate(Network::Testnet);
+    let public_key = private_key.public_key(&secp);
+    let address =
+        Address::p2wpkh(&public_key.try_into().expect("compressed key"), Network::Testnet);
+
+    println!("private key (WIF): {}", private_key.to_wif());
+    println!("testnet address: {}", address);
+}
+```
+
+Then run it:
+
+```bash
+cargo run
+```
+
+This gives you a quick success case built around three important ideas:
+
+- `PrivateKey::generate(Network::Testnet)` creates a new testnet private key using secure randomness
+- `to_wif()` prints the key in Wallet Import Format (WIF), which is a common string representation for private keys
+- `Address::p2wpkh(...)` derives a native SegWit address from the public key
+
+For a local testnet experiment, it is fine to print the private key like this. In real applications, treat private keys as sensitive material and avoid logging them.
