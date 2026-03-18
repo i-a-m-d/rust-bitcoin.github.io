@@ -35,5 +35,10 @@ bitcoin = "0.32.8"
 ```
 
 ## Enable useful features when you need them
+For example, if you want random key generation during experiments:
+
+```bash
+cargo add bitcoin --features rand-std
+```
 
 ## Write a first tiny program
