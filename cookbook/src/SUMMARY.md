@@ -10,3 +10,4 @@
 - [Working with PSBTs](psbt.md)
     - [Constructing and Signing Multiple Inputs - SegWit V0](psbt/multiple_inputs_segwit-v0.md)
     - [Constructing and Signing Multiple Inputs - Taproot](psbt/multiple_inputs_taproot.md)
+- [Mermaid Demo](mermaid_demo.md)
