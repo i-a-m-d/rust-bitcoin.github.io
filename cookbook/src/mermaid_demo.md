@@ -23,11 +23,9 @@ flowchart LR
     TX1 --> U1
     TX1 --> U2
 
-    classDef utxo fill:#eef9ee,stroke:#2f7d32,stroke-width:2px,color:#1f3a22;
-    classDef spent fill:#ffffff,stroke:#777,stroke-width:2px,stroke-dasharray: 6 4,color:#555;
-    classDef tx fill:#e8f1ff,stroke:#3566a8,stroke-width:1.5px,color:#1d2f52;
-
-    class U0 spent;
-    class U1,U2 utxo;
-    class CB,TX1 tx;
+    style U0 fill:#ffffff,stroke:#777,stroke-width:2px,stroke-dasharray: 6 4,color:#555
+    style U1 fill:#eef9ee,stroke:#2f7d32,stroke-width:2px,color:#1f3a22
+    style U2 fill:#eef9ee,stroke:#2f7d32,stroke-width:2px,color:#1f3a22
+    style CB fill:#e8f1ff,stroke:#3566a8,stroke-width:1.5px,color:#1d2f52
+    style TX1 fill:#e8f1ff,stroke:#3566a8,stroke-width:1.5px,color:#1d2f52
 ```
