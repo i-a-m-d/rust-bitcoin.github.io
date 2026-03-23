@@ -23,7 +23,7 @@ runnable = false # playground is not runnable by default
 
 [preprocessor.runnable-examples]
 command = "./mdbook-runnable-examples.sh"
-enabled = false
+enabled = true
 examples-dir = "runnable_examples/examples"
 output-dir = "runnable_examples/output"
 manifest-path = "runnable_examples/Cargo.toml"
