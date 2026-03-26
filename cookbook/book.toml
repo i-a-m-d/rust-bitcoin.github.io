@@ -17,7 +17,8 @@ edition = "2021"
 
 [output.html]
 additional-css = ["mermaid-ssr-fixes.css", "sidebar.css", "runnable_examples.css", "notes.css"]
-additional-js = ["runnable_examples.js"]
+# `sidebar.js` controls how many in-page heading levels appear in the left nav.
+additional-js = ["runnable_examples.js", "sidebar.js"]
 
 [output.html.playground]
 runnable = false # playground is not runnable by default
